@@ -4,23 +4,37 @@ import Login from "./Pages/login.jsx";
 import DialogueBox from "./Common/dialogueBox";
 import NavBar from "./Common/navBar";
 import MyNav from "./Common/myNav";
-import { useState } from "react";
+import { StrictMode, useState } from "react";
 import CreateBug from "./Pages/createBug";
 import TableView from "./Common/tableView";
+import Master from "./Common/master";
+import ParentChild from "./ParentChildren";
+import { Parent } from "./Pages/Parent";
+import Users from "./Pages/Users";
 function App() {
   // return <NavBar />;
   // return <DialogueBox type={"employee"} />;
+
   return (
+    // <StrictMode>
     <div className="contain">
       {/* <div className="nav"> */}
-      <MyNav />
+      {/* <MyNav /> */}
       {/* </div> */}
+      <DialogueBox type="employee" />
       <div className="space"></div>
       {/* <div className="tableComp"> */}
-      <TableView />
+      {/* <TableView /> */}
       {/* </div> */}
       {/* <CreateBug /> */}
+      {/* <Master /> */}
+      {/* <ParentChild /> */}
+
+      {/* <Users name="yash" /> */}
+
+      {/* <Parent /> */}
     </div>
+    /* </StrictMode> */
   );
 
   // return <CreateBug />;

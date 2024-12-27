@@ -408,129 +408,145 @@ function EmployeeModal(modalState) {
   );
 }
 
-// function ProjectModal(modalState) {
-//   const [show, setShow] = useState(false);
-//   const [employeeId, setEmployeeId] = useState("");
-//   const [employeeName, setEmployeeName] = useState("");
-//   const [designation, setDesignation] = useState("");
-//   const [isOpen, setIsOpen] = useState(false);
+function EditEmployeeModal(modalState, employeename, employeeid, position) {
+  const [show, setShow] = useState(false);
+  const [employeeId, setEmployeeId] = useState("");
+  const [employeeName, setEmployeeName] = useState("");
+  const [designation, setDesignation] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const message = "Employee updated successfully !";
+  useEffect(() => {
+    setShow(modalState === "true");
+    handleShowModal();
+  }, [modalState]);
 
-//   useEffect(() => {
-//     if (modalState === "true") {
-//       setShow(true);
-//     } else if (modalState === "false") {
-//       setShow(false);
-//     }
-//   }, [modalState]);
+  const handleShowModal = () => {
+    setShow(true);
+  };
 
-//   const handleShowModal = () => {
-//     setShow(true);
-//   };
+  const handleCloseModal = () => {
+    setShow(false);
+    window.location.reload();
+  };
 
-//   const handleCloseModal = () => {
-//     setShow(false);
-//   };
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
 
-//   const toggleDropdown = () => {
-//     setIsOpen(!isOpen);
-//   };
+  const handleSelection = (selectedDesignation) => {
+    setDesignation(selectedDesignation);
+    console.log(selectedDesignation);
+    setIsOpen(false);
+  };
 
-//   const handleSelection = (selectedDesignation) => {
-//     setDesignation(selectedDesignation);
-//     setIsOpen(false);
-//   };
+  //Handle save - api code here
+  function saveChanges() {
+    toastMessage(message);
 
-//   const saveChanges = () => {
-//     // Implement your logic to save changes here
-//     handleCloseModal();
-//   };
+    handleCloseModal();
 
-//   return (
-//     <div>
-//       <div style={{ display: "block", width: 700, padding: 30 }}>
-//         <Modal show={show} onHide={handleCloseModal}>
-//           <Modal.Header closeButton>
-//             <Modal.Title>Your Modal Title</Modal.Title>
-//           </Modal.Header>
-//           <Modal.Body>
-//             <div>
-//               <div className="input_container">
-//                 <label className="input_label" htmlFor="email_field">
-//                   Input 1
-//                 </label>
-//                 <input
-//                   name="input-name"
-//                   type="text"
-//                   className="input_field"
-//                   id="input1"
-//                   value={employeeId}
-//                   onChange={(e) => setEmployeeId(e.target.value)}
-//                 />
-//               </div>
-//               <div className="input_container">
-//                 <label className="input_label" htmlFor="employeename">
-//                   Input 2
-//                 </label>
-//                 <input
-//                   name="input-name"
-//                   type="text"
-//                   className="input_field"
-//                   id="input2"
-//                   value={employeeName}
-//                   onChange={(e) => setEmployeeName(e.target.value)}
-//                 />
-//               </div>
-//               <div className="input_container">
-//                 <div className="dropdown employee_dropdown">
-//                   <button
-//                     className="btn btn-secondary dropdown-toggle"
-//                     type="button"
-//                     id="dropdownMenuButton"
-//                     onClick={toggleDropdown}
-//                     aria-haspopup="true"
-//                     aria-expanded={isOpen ? "true" : "false"}
-//                   >
-//                     {designation || "Select Designation"}
-//                   </button>
-//                   <div
-//                     className={`dropdown-menu ${isOpen ? "show" : ""}`}
-//                     aria-labelledby="dropdownMenuButton"
-//                   >
-//                     <a
-//                       className="dropdown-item"
-//                       href="#"
-//                       onClick={() => handleSelection("Developer")}
-//                     >
-//                       Developer
-//                     </a>
-//                     <a
-//                       className="dropdown-item"
-//                       href="#"
-//                       onClick={() => handleSelection("QA Tester")}
-//                     >
-//                       QA Tester
-//                     </a>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </Modal.Body>
-//           <Modal.Footer>
-//             <Button variant="primary" onClick={saveChanges}>
-//               Save
-//             </Button>
-//             <Button variant="secondary" onClick={handleCloseModal}>
-//               Close
-//             </Button>
-//           </Modal.Footer>
-//         </Modal>
-//       </div>
-//       <Button variant="info" onClick={handleShowModal}>
-//         Open Modal
-//       </Button>
-//     </div>
-//   );
-// }
+    window.location.reload();
+  }
+  function toastMessage(message) {
+    // console.log(message);
+    toast(message, {
+      position: "top-right",
+    });
+  }
+
+  const employee = {
+    employeename: "abcd",
+    employeeid: "1234",
+    designation: "Developer",
+  };
+
+  return (
+    <div>
+      <div style={{ display: "block", width: 700, padding: 30 }}>
+        <Modal show={show} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Enter employee details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div>
+              <div className="input_container">
+                <label className="input_label" htmlFor="email_field">
+                  Employee name
+                </label>
+                <input
+                  name="input-name"
+                  type="text"
+                  className="input_field"
+                  id="input1"
+                  value={employee.employeeid}
+                  onChange={(e) => setEmployeeId(e.target.value)}
+                />
+              </div>
+              <div className="input_container">
+                <label className="input_label" htmlFor="employeename">
+                  Employee ID
+                </label>
+                <input
+                  name="input-name"
+                  type="text"
+                  className="input_field"
+                  id="input2"
+                  value={employee.employeename}
+                  onChange={(e) => setEmployeeName(e.target.value)}
+                />
+              </div>
+              <div className="input_container">
+                <div className="dropdown employee_dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    onClick={toggleDropdown}
+                    aria-haspopup="true"
+                    aria-expanded={isOpen ? "true" : "false"}
+                  >
+                    {designation || employee.designation}
+                  </button>
+                  <div
+                    className={`dropdown-menu ${isOpen ? "show" : ""}`}
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href="#"
+                      onClick={() => handleSelection("Developer")}
+                    >
+                      Developer
+                    </a>
+                    <a
+                      className="dropdown-item"
+                      href="#"
+                      onClick={() => handleSelection("QA Tester")}
+                    >
+                      QA Tester
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={saveChanges}>
+              Save
+            </Button>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+      {/* <Button variant="info" onClick={handleShowModal}>
+        Open Modal
+      </Button> */}
+    </div>
+  );
+}
+
 function ProjectModal({ modalState }) {
   // Corrected to accept props as an object
   const [show, setShow] = useState(false);
@@ -623,7 +639,7 @@ function DialogueBox({ type }) {
       ) : type === "project" ? (
         <ProjectModal modalState="true" />
       ) : (
-        <CreateBug modalState="true" />
+        <EditEmployeeModal modalState="true" />
       )}
     </div>
   );
